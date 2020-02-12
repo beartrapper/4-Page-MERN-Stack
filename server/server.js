@@ -4,10 +4,14 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Countries = require('./routes/api/Counties');
 const Areas = require('./routes/api/Areas');
+var cors = require('cors')
+
 
 
 const port = 5000;
 
+//middlewares being used
+app.use(cors())
 app.use(bodyParser.json());
 
 app.get('/', (req, res ) => {

@@ -3,10 +3,14 @@ Looking for a sample website using MEAN stack.
 
 - login+signup 2.
 
-- landing page: link for 2 countries section with list of areas under each country
-  (I just need 2 countries & 2 areas under it) 3. once you click the area link,
-  3rd page will show 2 category section with category title (e.g. category1, category2), 
-  and under each category 2 links to click (e.g. wanted1, wanted2)
+- landing page: link for 2 countries section with 
+  list of areas under each country
+  (I just need 2 countries & 2 areas under it) 
+  3. once you click the area link,
+  3rd page will show 2 category 
+  section with category title (e.g. category1, category2), 
+  and under each category 2 
+  links to click (e.g. wanted1, wanted2)
 
  - 4. Once you click the link wanted1/2, a page will be shown, with some description, and contact.
   and a button for email to contact. If you press email to contact,
