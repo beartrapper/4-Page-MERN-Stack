@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 //get specific
 router.get('/:id', (req, res) => {
     Area.find({countryId: req.params.id})
-    .sort({date: -1})
+    // .sort({date: -1})
     .then(areas => {
         res.json(areas)
     })

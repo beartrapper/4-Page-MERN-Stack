@@ -1,34 +1,42 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import Nav from "./Nav";
+import {useLocation} from 'react-router';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 
-function Body() {
+function CategoriesPage () {
+    const location = useLocation();
+    const [areaId, setAreaID] = useState('');
+    const [categories, setCategories] = useState([]);
+    const [ads, setAds] = useState([]);
 
-    const [countries, setCountries] = useState([])
-    const [areas, setAreas] = useState([])
-
-    useEffect(() => {
-        axios.get('http://localhost:5000/api/countries').then(res => {
-
-            setCountries(res.data);
+    useEffect(async () => {
+        setAreaID(location.state.item);
+        await axios.get('http://localhost:5000/api/categories').then(res => {
+            console.log(res.data)
+            setCategories(res.data);
         }).catch(err => console.log(err))
+        
+        await axios.get('http://localhost:5000/api/ads').then(res => {
+            console.log(res.data)
 
-        axios.get('http://localhost:5000/api/areas').then(res => {
-
-            setAreas(res.data);
+            setAds(res.data);
         }).catch(err => console.log(err))
-
 
     }, [])
-
-
-    return (
+    return(
+        <>
+        <Nav />
         <div className="container">
             <div className="row pl-3">
                 {
-                countries.map((item, key) => {
+                categories.map((item, key) => {
+                    console.log(item.areaId);
+                    console.log('areaid ' + areaId)
                     return (
-                        <div className="col-md-4">
+                    
+                 <>{item.areaId == areaId ? <>
+                      <div className="col-md-4">
                             <div className="body-background mt-3 text-center border-radius">
                                 <p className="text-color-body">
                                     {
@@ -43,23 +51,25 @@ function Body() {
 
                                     <div class="list-group">
                                         {
-                                        areas.map(area => {
+                                        ads.map(ad => {
                                             return (
 
                                                 <>{
-                                                    area.countryId == item._id ? <>
+                                                    
+                                                    ad.categoryId == item._id ? <>
                                                     <Link to={{
-                                                        pathname: "/categories",
+                                                        pathname: "/ad",
                                                         state: {
-                                                            item: area._id
+                                                            item: ad
                                                         }
                                                     }}>
                                                         <input type="checkbox" name="CheckBoxInputName" value="Value4" id="CheckBox4"/>
                                                         <label class="list-group-item" for="CheckBox4">
                                                             {
-                                                            area.name
+                                                            ad.name
                                                         }</label>
                                                         </Link>
+                                                       
 
 
                                                     </> : <></>
@@ -74,13 +84,16 @@ function Body() {
                         </div>
 
 
+                 </>: <></>}</>
+                      
                     );
                 })
             } </div>
         </div>
 
 
+</>
     );
 }
 
-export default Body;
+export default CategoriesPage;

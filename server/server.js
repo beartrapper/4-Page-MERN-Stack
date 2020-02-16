@@ -4,9 +4,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Countries = require('./routes/api/Counties');
 const Areas = require('./routes/api/Areas');
+const Categories = require('./routes/api/Category');
+const Ads = require('./routes/api/Ads');
+
 var cors = require('cors')
-
-
 
 const port = 5000;
 
@@ -32,6 +33,8 @@ mongoose.connect(DB, {useUnifiedTopology: true})
 
 //routes
 app.use('/api/countries', Countries);
+app.use('/api/categories', Categories);
+app.use('/api/ads', Ads);
 app.use('/api/areas', Areas);
 
 
