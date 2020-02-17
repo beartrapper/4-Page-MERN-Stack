@@ -6,20 +6,32 @@ function Body() {
 
     const [countries, setCountries] = useState([])
     const [areas, setAreas] = useState([])
+ 
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/countries').then(res => {
-
-            setCountries(res.data);
-        }).catch(err => console.log(err))
-
-        axios.get('http://localhost:5000/api/areas').then(res => {
-
-            setAreas(res.data);
-        }).catch(err => console.log(err))
-
-
+        async function fetchFunction() {
+            await axios.get('http://localhost:5000/api/countries').then(res => {
+    
+                setCountries(res.data);
+            }).catch(err => console.log(err))
+    
+            await axios.get('http://localhost:5000/api/areas').then(res => {
+    
+                setAreas(res.data);
+            }).catch(err => console.log(err))
+        }
+        fetchFunction()
     }, [])
+
+
+    // useEffect(() => {
+    //     async function fetchData() {
+    //       // You can await here
+    //       const response = await MyAPI.getData(someId);
+    //       // ...
+    //     }
+    //     fetchData();
+    //   }, [someId]);
 
 
     return (

@@ -1,7 +1,22 @@
 import React from 'react';
+import { connect } from "react-redux";
+import { logoutUser } from "../actions/authActions";
+import { Link } from 'react-router-dom'
+ 
+class Nav extends React.Component {
 
-function Nav() {
+    onLogoutClick = e => {
+        e.preventDefault();
+        this.props.logoutUser();
+      };
+
+
+    render() {
+    const { user } = this.props.auth;
+    console.log(user)
+       
     return (
+        
         <>
             <nav className="navbar navbar-expand-lg navbar-light ">
                 <a className="navbar-brand temp-navs" href="#">Bed Page Clone</a>
@@ -19,8 +34,25 @@ function Nav() {
                         <li className="nav-item">
                             <a className="nav-link" href="#">Meet and Fuck</a>
                         </li>
+
+                        {user ? 
+                        <>
+                          <li className="nav-item">
+                            <a className="nav-link" href="#">Hi {user.name}!</a>
+                                </li></>:<></>}
                         <li className="nav-item">
+
+                            {user ? <>
+                              
+                              
+                                <button className="nav-link" onClick={this.onLogoutClick}>Logout</button>
+                                
+                            </>: <>
+                            <Link to="/login">
                             <a className="nav-link" href="#">My Account</a>
+                            </Link>
+                            </>}
+                            
                         </li>
                     </ul>
                 </div>
@@ -30,6 +62,18 @@ function Nav() {
             <hr className="hr-nav"/>
         </>
     );
+    }
 }
 
-export default Nav;
+const mapStateToProps = state => ({
+    auth: state.auth
+  });
+
+  
+export default connect(
+    mapStateToProps,
+    { logoutUser }
+  )(Nav);
+  
+
+

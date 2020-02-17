@@ -10,8 +10,12 @@ function CategoriesPage () {
     const [categories, setCategories] = useState([]);
     const [ads, setAds] = useState([]);
 
-    useEffect(async () => {
+    useEffect(() => {
         setAreaID(location.state.item);
+        
+        async function fetchFunction(){
+        
+        
         await axios.get('http://localhost:5000/api/categories').then(res => {
             console.log(res.data)
             setCategories(res.data);
@@ -22,6 +26,9 @@ function CategoriesPage () {
 
             setAds(res.data);
         }).catch(err => console.log(err))
+    }
+
+    fetchFunction()
 
     }, [])
     return(
