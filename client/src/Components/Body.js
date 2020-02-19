@@ -63,7 +63,7 @@ function Body() {
                                                     <Link to={{
                                                         pathname: "/categories",
                                                         state: {
-                                                            item: area._id
+                                                            item: item._id
                                                         }
                                                     }}>
                                                         <input type="checkbox" name="CheckBoxInputName" value="Value4" id="CheckBox4"/>

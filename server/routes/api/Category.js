@@ -4,43 +4,36 @@ const router = express.Router();
 const Category = require('../../models/CatergoryModel');
 
 
-//get All
+// get All
 router.get('/', (req, res) => {
-    Category.find()
-    .sort({date: -1})
-    .then(cats => {
+    Category.find().sort({date: -1}).then(cats => {
         res.json(cats)
     })
 });
 
-//get specific
+// get specific
 router.get('/:id', (req, res) => {
-    Category.find({areaId: req.params.id})
-    .then(cats => {
+    Category.find({areaId: req.params.id}).then(cats => {
         res.json(cats)
     })
 });
 
 
-//post new one
-router.post('/:areaId', (req, res) => {
-    const obj = new Category({
-        name: req.body.name,
-        areaId: req.params.areaId
-    });
+// post new one
+router.post('/:countryId', (req, res) => {
+    const obj = new Category({name: req.body.name, areaId: req.params.countryId});
     obj.save().then((resp) => {
         res.json(resp)
-    }).catch(err => {console.log('err is here');res.json(err)})
+    }).catch(err => {
+        console.log('err is here');
+        res.json(err)
+    })
 
 });
 
 
 // /delete
 router.post('/:catId/delete', (req, res) => {
-    Category.deleteOne({
-        _id: req.params.catId})
-    
-    .then((resp) => res.json(resp))
-    .catch(err => res.json(err))
+    Category.deleteOne({_id: req.params.catId}).then((resp) => res.json(resp)).catch(err => res.json(err))
 });
 module.exports = router;
