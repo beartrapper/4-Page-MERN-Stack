@@ -20,8 +20,8 @@ router.get('/:id', (req, res) => {
 
 
 // post new one
-router.post('/:countryId', (req, res) => {
-    const obj = new Category({name: req.body.name, areaId: req.params.countryId});
+router.post('/', (req, res) => {
+    const obj = new Category({name: req.body.name});
     obj.save().then((resp) => {
         res.json(resp)
     }).catch(err => {

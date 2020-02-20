@@ -3,16 +3,19 @@ import Nav from "./Nav";
 import {useLocation} from 'react-router';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-
+ 
 function CategoriesPage () {
     const location = useLocation();
     const [areaId, setAreaID] = useState('');
     const [categories, setCategories] = useState([]);
     const [ads, setAds] = useState([]);
 
+
+    const temp = true;
+
     useEffect(() => {
         setAreaID(location.state.item);
-        
+        console.log('hreere e ' +   location.state.item)
         async function fetchFunction(){
         
         
@@ -42,7 +45,7 @@ function CategoriesPage () {
                     console.log('areaid ' + areaId)
                     return (
                     
-                 <>{item.areaId == areaId ? <>
+                 <>{temp ? <>
                       <div className="col-md-4">
                             <div className="body-background mt-3 text-center border-radius">
                                 <p className="text-color-body">
@@ -61,6 +64,8 @@ function CategoriesPage () {
                                         ads.map(ad => {
                                             return (
 
+                                            <>{
+                                                areaId == ad.areaId ?
                                                 <>{
                                                     
                                                     ad.categoryId == item._id ? <>
@@ -81,6 +86,10 @@ function CategoriesPage () {
 
                                                     </> : <></>
                                                 }</>
+                                                :<></>
+                                            }</>
+                                            
+                                           
                                             )
                                         })
                                     } </div>

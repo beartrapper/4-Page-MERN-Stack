@@ -1,18 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const CategorySchema = new Schema ({
+const CategorySchema = new Schema({
     name: {
         type: String,
-        required: true 
+        required: true
     },
     date: {
         type: Date,
         default: Date.now
-    },
-    areaId: {
-        type: String,
-        required: true
     }
 })
 

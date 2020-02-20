@@ -22,10 +22,11 @@ router.get('/:id', (req, res) => {
 
 
 //post new one
-router.post('/:catId', (req, res) => {
+router.post('/:catId/:areaId', (req, res) => {
     const obj = new Ad({
         name: req.body.name,
         categoryId: req.params.catId,
+        areaId: req.params.areaId,
         description: req.body.desc,
         contact: req.body.contact
     });
