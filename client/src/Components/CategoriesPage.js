@@ -9,11 +9,11 @@ function CategoriesPage () {
     const [areaId, setAreaID] = useState('');
     const [categories, setCategories] = useState([]);
     const [ads, setAds] = useState([]);
-
-
     const temp = true;
 
+
     useEffect(() => {
+
         setAreaID(location.state.item);
         console.log('hreere e ' +   location.state.item)
         async function fetchFunction(){
@@ -24,7 +24,10 @@ function CategoriesPage () {
             setCategories(res.data);
         }).catch(err => console.log(err))
         
-        await axios.get('http://localhost:5000/api/ads').then(res => {
+        await axios.get('http://localhost:5000/api/subs').then(res => {
+        const temp = true;
+
+            console.log('subs')
             console.log(res.data)
 
             setAds(res.data);
@@ -41,8 +44,8 @@ function CategoriesPage () {
             <div className="row pl-3">
                 {
                 categories.map((item, key) => {
-                    console.log(item.areaId);
-                    console.log('areaid ' + areaId)
+                    // console.log(item.areaId);
+                    // console.log('areaid ' + areaId)
                     return (
                     
                  <>{temp ? <>
@@ -62,32 +65,58 @@ function CategoriesPage () {
                                     <div class="list-group">
                                         {
                                         ads.map(ad => {
+                                            console.log('sub id ' + ad.categoryId)
+                                            console.log(item._id)
                                             return (
 
-                                            <>{
-                                                areaId == ad.areaId ?
-                                                <>{
+                                            // <>{
+                                            //     areaId == ad.countryId ?
+                                            //     <>{
                                                     
-                                                    ad.categoryId == item._id ? <>
-                                                    <Link to={{
-                                                        pathname: "/ad",
-                                                        state: {
-                                                            item: ad
-                                                        }
-                                                    }}>
-                                                        <input type="checkbox" name="CheckBoxInputName" value="Value4" id="CheckBox4"/>
-                                                        <label class="list-group-item" for="CheckBox4">
-                                                            {
-                                                            ad.name
-                                                        }</label>
-                                                        </Link>
+                                            //         ad.categoryId == item._id ? <>
+                                            //         <Link to={{
+                                            //             pathname: "/ads",
+                                            //             state: {
+                                            //                 item: ad,
+                                            //                 catId: ad.catId
+                                            //             }
+                                            //         }}>
+                                            //             <input type="checkbox" name="CheckBoxInputName" value="Value4" id="CheckBox4"/>
+                                            //             <label class="list-group-item" for="CheckBox4">
+                                            //                 {
+                                            //                 ad.name
+                                            //             }</label>
+                                            //             </Link>
                                                        
 
 
-                                                    </> : <></>
-                                                }</>
-                                                :<></>
-                                            }</>
+                                            //         </> : <></>
+                                            //     }</>
+                                            //     :<></>
+                                            // }</>
+
+                                            <>
+                                            
+                                            {ad.categoryId == item._id ? <>
+                                            
+                                                    <Link to={{
+                                                         pathname: "/ads",
+                                                         state: {
+                                                             item: ad,
+                                                             catId: ad.categoryId,
+                                                            //  countryId: sadsa,
+                                                             areaId: areaId,
+                                                             subCategoryId: ad._id
+                                                         }
+                                                     }}>
+                                                         <input type="checkbox" name="CheckBoxInputName" value="Value4" id="CheckBox4"/>
+                                                         <label class="list-group-item" for="CheckBox4">
+                                                             {
+                                                             ad.name
+                                                         }</label>
+                                                         </Link>
+                                            </>:<></>}
+                                            </>
                                             
                                            
                                             )

@@ -22,13 +22,15 @@ router.get('/:id', (req, res) => {
 
 
 //post new one
-router.post('/:catId/:areaId', (req, res) => {
+router.post('/:subId/:areaId', (req, res) => {
+    console.log(req.body)
     const obj = new Ad({
         name: req.body.name,
-        categoryId: req.params.catId,
+        subCategoryId: req.params.subId,
         areaId: req.params.areaId,
         description: req.body.desc,
-        contact: req.body.contact
+        contact: req.body.contact,
+        filePath: req.body.filePath
     });
     obj.save().then((resp) => {
         res.json(resp)

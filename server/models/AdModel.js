@@ -10,7 +10,7 @@ const AdSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    categoryId: {
+    subCategoryId: {
         type: String, 
         required: true
     },
@@ -25,6 +25,9 @@ const AdSchema = new Schema({
     contact: {
         type: String,
         required: true
+    },
+    filePath: {
+        type: String
     }
 })
 

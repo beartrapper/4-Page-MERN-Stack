@@ -1,9 +1,21 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {logoutUser} from "../actions/authActions";
-import {Link} from 'react-router-dom'
+import {Link, Redirect, withRouter} from 'react-router-dom'
 
 class Nav extends React.Component {
+
+    
+    constructor(props) {
+    super(props);
+    this.routeChange = this.routeChange.bind(this);
+
+    }
+    routeChange(){
+        let path = 'create';
+        this.props.history.push(path);
+     
+      }
 
     onLogoutClick = e => {
         e.preventDefault();
@@ -64,7 +76,18 @@ class Nav extends React.Component {
                         </ul>
                     </div>
                 </nav>
-                <p className="nav-below-writing">Choose a location</p>
+                <div className="row">
+                    <div className="col-sm-6">
+                    <p className="nav-below-writing">Choose a location</p>
+                    </div>
+                    {user ? 
+                        <div clas="col-sm-6">
+                        <button onClick={this.routeChange} className="btn btn-primary margining">Post Ad</button>
+    
+                        </div>:<></>    
+                }
+                    
+                </div>
 
                 <hr className="hr-nav"/>
             </>
@@ -75,4 +98,4 @@ class Nav extends React.Component {
 const mapStateToProps = state => ({auth: state.auth});
 
 
-export default connect(mapStateToProps, {logoutUser})(Nav);
+export default connect(mapStateToProps, {logoutUser})(withRouter(Nav));

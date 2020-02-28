@@ -21,6 +21,8 @@ import store from "./store";
 // import Landing from "./Components/layout/Landing";
 import Register from "./Components/auth/Register";
 import Login from "./Components/auth/Login";
+import AdPage from './Components/AdsPage';
+import newAd from './Components/NewAd';
 // import PrivateRoute from "./Components/private-route/PrivateRoute";
 // import Dashboard from "./Components/dashboard/Dashboard";
 
@@ -58,12 +60,17 @@ function App() {
                         <Route path="/ad">
                             <DescriptionPage/>
                         </Route>
+                        <Route path="/ads">
+                            <AdPage/>
+                        </Route>
                         <Route path="/email">
                             <EmailPage/>
                         </Route>
                         {/* <Route exact path="/landing" component={Landing} /> */}
                         <Route exact path="/register"
                             component={Register}/>
+                                 <Route exact path="/create"
+                            component={newAd}/>
                         <Route exact path="/login"
                             component={Login}/> {/* <PrivateRoute exact path="/dashboard" component={Dashboard} /> */} </Switch>
                 </Router>
